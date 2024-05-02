@@ -1,13 +1,26 @@
 export type Article = {
-  id: string 
+  id: string
+  title: string
   sinopse: string
-  authorsId: string[]
-  grades: {
-    evaluatorId: string
-    n1: number
-    n2: number
-    total: number
-  }[]
+  authors: Author[]
+  grades: Grades[]
+  file: {
+    url: string
+    type: string
+  }
+  gradeMd: number
+  isPhantom: boolean
+}
+
+export type Grades = {
+  evaluatorId: string
+  n1: number
+  n2: number
+  total: number
+}
+
+export enum ExtensaoArquivoEnum {
+  PDF = 'PDF'
 }
 
 export type Role = {
@@ -27,5 +40,15 @@ export type User = {
   name: string
   email: string
   password?: string
-  roleId: string
+  role: Role
+}
+
+export type Author = {
+  id: string
+  name: string
+}
+
+export type TResponse<T> = {
+  data: T
+  message?: string
 }

@@ -1,14 +1,26 @@
+import { MouseEvent } from "react"
+import { Button as NextUiButton } from "@nextui-org/react"
+
 interface ButtonProps {
   text: string
-  handleClick: () => void
+  handleClick?: (e: MouseEvent<HTMLButtonElement>) => void
   className?: string
+  isHidden?: boolean
+  color?: 'default' | 'danger' | 'success'
+  variant?: 'flat' | 'solid'
 }
 
-export const Button = ({text, handleClick, className}: ButtonProps) => {
-  return <button 
-    onClick={() => handleClick()} 
-    className={className ?? 'px-5 py-2 bg-zinc-400 rounded-lg hover:bg-zinc-500'}
-    >
+export const Button = ({text, handleClick, className, color, variant, isHidden = false}: ButtonProps) => {
+
+  if (isHidden) return <></>
+
+  return <NextUiButton 
+    onClick={ handleClick ? (e) => handleClick(e) : (e) => e.preventDefault()}
+    className={className ?? 'px-5 py-2'}
+    variant={variant ?? "ghost"}
+    color={color ?? "primary"}
+    type="submit"
+  >
     {text}
-  </button>
+  </NextUiButton>
 }

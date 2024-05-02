@@ -1,18 +1,22 @@
-import { ChangeEvent } from "react"
+import { Input as NextUiInput } from "@nextui-org/react"
+import { ReactNode } from "react"
 
 interface InputProps {
-  type: 'number' | 'text'
-  data: string
-  dataName: string
-  handleChange: (e: ChangeEvent<HTMLInputElement>, name: string) => void
+  type: 'number' | 'text' | 'string' | 'password'
+  label?: string
+  endContent?: ReactNode
+  field
 }
 
-export const Input = ({type, data, dataName,handleChange}: InputProps) => {
-  return <input 
+export function Input({type, label, endContent, field}: InputProps) {
+  return <NextUiInput 
     type={type} 
-    value={data} 
-    onChange={(e) => handleChange(e, dataName)} 
-    className={"text-black bg-zinc-600 px-5 py-2 rounded-lg"}
+    variant="faded"
+    color="primary"
+    className="text-black"
+    label={label ?? ''}
+    endContent={endContent}
+    {...field}
   >
-  </input>
+  </NextUiInput>
 }
